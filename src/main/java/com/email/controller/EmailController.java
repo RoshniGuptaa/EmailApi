@@ -2,15 +2,18 @@ package com.email.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.email.model.EmailRequest;
+import com.email.model.EmailResponse;
 import com.email.service.EmailService;
 
 @RestController
+@CrossOrigin
 public class EmailController {
 
 	@Autowired
@@ -30,10 +33,10 @@ public class EmailController {
 		System.out.println(request);
 		if(result)
 		{
-			return ResponseEntity.ok("Mail sent Successfully");
+			return ResponseEntity.ok(new EmailResponse("Mail sent Successfully"));
 		}
 		else {
-			return ResponseEntity.badRequest().body("email not sent");
+			return ResponseEntity.badRequest().body(new EmailResponse("email not sent"));
 		}
 		
 	}
